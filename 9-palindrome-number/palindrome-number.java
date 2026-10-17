@@ -1,18 +1,15 @@
 class Solution {
     public boolean isPalindrome(int x) {
-        if(x < 0){
+        if(x < 0 || (x % 10 == 0 && x != 0)){
             return false;
         }
-        
-        int rev = 0;
-        int n = x;
 
-        while(n > 0){
-            int ld = n % 10;
-            rev = rev * 10 + ld;
-            n = n / 10;
+        int rev = 0;
+        while(x > rev){
+            rev = rev * 10 + x % 10;
+            x = x / 10;
         }
 
-        return rev == x;
+        return x == rev || x == rev/10;
     }
 }

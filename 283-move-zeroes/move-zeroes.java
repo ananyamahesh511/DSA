@@ -8,11 +8,10 @@ class Solution {
             if(nums[r] == 0){
                 r++;
             }else{
-                if(w != r){
-                    int temp = nums[w];
-                    nums[w] = nums[r];
-                    nums[r] = temp;
-                }
+                int temp = nums[w];
+                nums[w] = nums[r];
+                nums[r] = temp;
+
                 r++;
                 w++;
             }

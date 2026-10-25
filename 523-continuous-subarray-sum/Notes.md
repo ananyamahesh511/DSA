@@ -1,1 +1,1 @@
-<h2>continuous-subarray-sum Notes</h2><hr>[ Time taken: 44m 39s ]
+<h2>continuous-subarray-sum Notes</h2><hr>[ Time taken: 8m 0s ]

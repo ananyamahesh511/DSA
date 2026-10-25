@@ -4,16 +4,16 @@ class Solution {
         map.put(0, -1);
 
         int n = nums.length;
-
-        int ps = 0;
+        int prefix_sum = 0;
 
         for(int i=0; i<n; i++){
-            ps += nums[i];
-
-            int rem = ps % k;
+            prefix_sum += nums[i];
+            int rem = prefix_sum % k;
 
             if(map.containsKey(rem)){
-                if(i - map.get(rem) >= 2) return true;
+                if(i - map.get(rem) >= 2){
+                    return true;
+                }
             }else{
                 map.put(rem, i);
             }

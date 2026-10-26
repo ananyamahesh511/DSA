@@ -1,23 +1,30 @@
 class Solution {
-    void util(int[] nums, int idx, Set<List<Integer>> set, List<Integer> temp){
+    Set<List<Integer>> set = new HashSet<>();
+
+    void util(int idx, int[] nums, List<Integer> temp){
         if(idx == nums.length){
             set.add(new ArrayList<>(temp));
             return;
         }
 
-        //picked
+        //pick
         temp.add(nums[idx]);
-        util(nums, idx+1, set, temp);
+        util(idx+1, nums, temp);
         temp.remove(temp.size() - 1);
-        //not picked
-        util(nums, idx+1, set, temp);
+
+        //not pick
+        util(idx+1, nums, temp);
+
     }
     public List<List<Integer>> subsets(int[] nums) {
-        Set<List<Integer>> set = new HashSet<>();
-        List<Integer> temp = new ArrayList<>();
+        List<List<Integer>> ls = new ArrayList<>();
 
-        util(nums, 0, set, temp);
+        util(0, nums, new ArrayList<>());
 
-        return new ArrayList<>(set);
+        for(List<Integer> p : set){
+            ls.add(p);
+        }
+
+        return ls;
     }
 }

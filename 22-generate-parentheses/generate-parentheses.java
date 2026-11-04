@@ -1,25 +1,30 @@
 class Solution {
-    void util(int n, int ocnt, int ccnt, String str, List<String> res){
-        //BASE CASE
+    void util(int n, List<String> res, int ocnt, int ccnt, StringBuilder str){
         if(str.length() == 2*n){
-            res.add(str);
-            return;
+            String s = str.toString();
+            res.add(s);
         }
 
-        //left part
         if(ocnt < n){
-            util(n, ocnt+1, ccnt, str+'(', res);
+            str.append('(');
+            util(n, res, ocnt+1, ccnt, str);
+            str.deleteCharAt(str.length() - 1);
         }
 
-        if(ccnt < ocnt){
-            util(n, ocnt, ccnt+1, str+')', res);
+        if(ocnt > ccnt){
+            str.append(')');
+            util(n, res, ocnt, ccnt+1, str);
+            str.deleteCharAt(str.length() - 1);
         }
     }
+
     public List<String> generateParenthesis(int n) {
         List<String> res = new ArrayList<>();
-        String str = "";
+        StringBuilder str = new StringBuilder();
+        int ocnt = 0;
+        int ccnt = 0;
 
-        util(n, 0, 0, str, res);
+        util(n, res, ocnt, ccnt, str);
 
         return res;
     }

@@ -1,37 +1,33 @@
 class Solution {
-    void swap(int i, int j, int[] nums){
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
-    }
-    
-    void util(int[] nums, List<List<Integer>> res, int idx){
-        //Base case
-        if(idx == nums.length){
-            List<Integer> temp = new ArrayList<>();
-            for(int i=0; i<nums.length; i++){
-                temp.add(nums[i]);
-            }
-            res.add(temp);
+    void util(int[] nums, boolean[] vis, List<List<Integer>> res, List<Integer>ls, int n){
+        if(ls.size() == n){
+            res.add(new ArrayList<>(ls));
             return;
         }
+        
+        for(int i=0; i<n; i++){
+            if(vis[i] != true){
+                //recurse
+                ls.add(nums[i]);
+                vis[i] = true;
 
-        for(int i = idx; i < nums.length; i++){
-            //swap
-            swap(i, idx, nums);
+                //call
+                util(nums, vis, res, ls, n);
 
-            //recursive call
-            util(nums, res, idx+1);
-
-            //undoing the swap
-           swap(i, idx, nums);
+                //backtrack
+                ls.remove(ls.size() - 1);
+                vis[i] = false;
+            }
         }
-
     }
-    public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
 
-        util(nums, res, 0);
+    public List<List<Integer>> permute(int[] nums) {
+        int n = nums.length;
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> ls = new ArrayList<>();
+        boolean[] vis = new boolean[n];
+
+        util(nums, vis, res, ls, n);
 
         return res;
     }

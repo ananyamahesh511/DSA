@@ -1,22 +1,20 @@
 class Solution {
-    void util(int i, String digits, StringBuilder temp, List<String> ans, Map<Character, String> map){
-
-        if(i == digits.length()){
-            ans.add(temp.toString());
+    void util(String digits, List<String> res, int idx, StringBuilder s, Map<Character, String> map){
+        if(idx == digits.length()){
+            res.add(new String(s.toString()));
             return;
         }
 
-        String str = map.get(digits.charAt(i));
-        for(int j=0; j<str.length(); j++){
-            temp.append(str.charAt(j));
-            util(i+1, digits, temp, ans, map);
-            temp.deleteCharAt(temp.length()-1);
+        String str = map.get(digits.charAt(idx));
+
+        for(int i=0; i<str.length(); i++){
+            s.append(str.charAt(i));
+            util(digits, res, idx+1, s, map);
+            s.deleteCharAt(s.length() - 1);
         }
     }
     public List<String> letterCombinations(String digits) {
         Map<Character, String> map = new HashMap<>();
-        map.put('0', "");
-        map.put('1', "");
         map.put('2', "abc");
         map.put('3', "def");
         map.put('4', "ghi");
@@ -26,11 +24,10 @@ class Solution {
         map.put('8', "tuv");
         map.put('9', "wxyz");
 
-        StringBuilder temp = new StringBuilder();
-        List<String> ans = new ArrayList<>();
+        List<String> res = new ArrayList<>();
 
-        util(0, digits, temp, ans, map);
+        util(digits, res, 0, new StringBuilder(), map);
 
-        return ans;
+        return res;
     }
 }

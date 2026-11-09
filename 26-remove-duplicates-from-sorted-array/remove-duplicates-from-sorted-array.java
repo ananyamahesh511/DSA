@@ -5,7 +5,9 @@ class Solution {
         int w = 1;
 
         while(r < n){
-            if(nums[r] == nums[r-1]) r++;
+            if(nums[r] == nums[r-1]){
+                r++;
+            }
             else{
                 nums[w] = nums[r];
                 w++;
